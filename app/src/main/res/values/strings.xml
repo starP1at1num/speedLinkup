@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SpeedLinkup</string>
+    <string name="game_time">剩余时间：</string>
+    <string name="start">开始游戏</string>
+    <string name="setting">设置</string>
+    <string name="time_setting">时间设置</string>
+    <string name="type_setting">形状设置</string>
+    <string name="other_setting">其他设置</string>
+    <string name="type_title">设置连连看的形状</string>
+    <string name="bmp_setting">设置连连看的图片</string>
+    <string name="during_setting">设置一局游戏的时间:</string>
+    <string name="album_setting">album_setting</string>
+    <string name="scale_setting">设置连连看的大小:</string>
+    <string name="lost">Lost</string>
+    <string name="lost_restart">游戏失败！ 重新开始</string>
+    <string name="dialog_sure">确定</string>
+    <string name="success">Success</string>
+    <string name="success_restart">游戏胜利！ 重新开始</string>
+    <string name="remaining_time">剩余时间:%1$d</string>
+</resources>
