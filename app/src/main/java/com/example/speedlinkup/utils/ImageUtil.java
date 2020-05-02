@@ -112,7 +112,7 @@ public class ImageUtil {
         List<PieceImage> result = new ArrayList<PieceImage>();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Set<String> set = sp.getStringSet("pathSet", null);
-        if(null == set){
+        if (null == set) {
             //用户未选择图片,使用默认图片
             // 遍历每个图片ID
             for (Integer value : resourceValues) {
@@ -122,21 +122,28 @@ public class ImageUtil {
                 PieceImage pieceImage = new PieceImage(bm, value);
                 result.add(pieceImage);
             }
-        }else {
+        } else {
             //用户选择了图片,使用用户储存的图片
             List<String> list = new ArrayList<String>(set);
-            //数量翻倍然后洗牌,最后加到list里面
-            list.addAll(list);
-            Collections.shuffle(list);
-            for (String path : list) {
+            List<String> resultList;
+            //选择图片数量大于所需的图片数量时
+            if (set.size() * 2 > size) {
+                resultList = list.subList(0, size / 2);
+            } else {
+                //数量翻倍然后洗牌,最后加到list里面
+                resultList = list;
+            }
+            resultList.addAll(resultList);
+            Collections.shuffle(resultList);
+            for (String path : resultList) {
                 // 加载图片
-                Bitmap bm = convertToBitmap(path,GameConf.PIECE_WIDTH, GameConf.PIECE_HEIGHT);
+                Bitmap bm = convertToBitmap(path, GameConf.PIECE_WIDTH, GameConf.PIECE_HEIGHT);
                 // 封装图片ID与图片本身
                 PieceImage pieceImage = new PieceImage(bm, path.hashCode());
                 result.add(pieceImage);
             }
             //不够的从本地补
-            if(list.size() < size){
+            if (list.size() < size) {
                 List<Integer> resource = getPlayValues(size - list.size());
                 for (Integer value : resource) {
                     // 加载图片
@@ -148,7 +155,6 @@ public class ImageUtil {
             }
             Collections.shuffle(result);
         }
-
         return result;
     }
 
@@ -169,7 +175,7 @@ public class ImageUtil {
         }
         opts.inJustDecodeBounds = false;
         float scale = Math.max(scaleWidth, scaleHeight);
-        opts.inSampleSize = (int)scale;
+        opts.inSampleSize = (int) scale;
         WeakReference<Bitmap> weak = new WeakReference<Bitmap>(BitmapFactory.decodeFile(path, opts));
         return Bitmap.createScaledBitmap(weak.get(), w, h, true);
     }
